@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+.env
+uploads/
+static/generated_images/
+*.log
+.DS_Store
+doctl_bin/
+gh_bin/
+git_bin/
