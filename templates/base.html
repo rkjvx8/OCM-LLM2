@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Vanguard Agile & Change Solutions supports organizational change, workforce transformation, Agile learning, and leadership development.">
+    <title>{% block title %}Vanguard Agile & Change Solutions{% endblock %}</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --navy: #0f172a;
+        --blue: #1d4ed8;
+        --teal: #0f766e;
+        --accent: #0f766e;
+        --accent-soft: #ecfdf5;
+        --text: #334155;
+        --muted: #64748b;
+        --bg: #f8fafc;
+        --card: #ffffff;
+        --border: #e2e8f0;
+        --surface: #f1f5f9;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+        color: var(--text);
+        background: var(--bg);
+        line-height: 1.65;
+      }
+      a { color: var(--blue); text-decoration: none; }
+      a:hover { text-decoration: underline; }
+      .topbar {
+        background: #ffffff;
+        border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        box-shadow: 0 12px 32px rgba(15, 23, 42, 0.06);
+      }
+      .nav-shell, .page, .footer-shell {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 16px 24px;
+      }
+      .nav-shell {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+      .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; color: var(--navy); }
+      .brand-mark {
+        display: inline-grid;
+        place-items: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 999px;
+        background: linear-gradient(135deg, var(--blue), var(--teal));
+        color: white;
+        font-size: 0.9rem;
+      }
+      nav { display: flex; flex-wrap: wrap; gap: 18px; }
+      nav a { color: var(--navy); font-weight: 600; }
+      .hero {
+        padding: 72px 24px 36px;
+        background: linear-gradient(135deg, #f8fafc 0%, #f0fdfa 100%);
+      }
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 0.9fr;
+        gap: 36px;
+        align-items: center;
+        max-width: 1120px;
+        margin: 0 auto;
+      }
+      .eyebrow {
+        display: inline-block;
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: var(--accent-soft);
+        color: var(--accent);
+        font-size: 0.92rem;
+        font-weight: 700;
+        margin-bottom: 18px;
+      }
+      h1, h2, h3 { color: var(--navy); line-height: 1.15; }
+      h1 { font-size: clamp(2.6rem, 4vw, 4.2rem); margin: 0 0 18px; max-width: 680px; }
+      .lead { font-size: 1.05rem; color: var(--muted); margin-bottom: 26px; max-width: 720px; }
+      .button-row { display: flex; flex-wrap: wrap; gap: 14px; }
+      .button { display: inline-flex; align-items: center; justify-content: center; padding: 14px 22px; border-radius: 999px; font-weight: 700; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+      .button:hover { transform: translateY(-1px); }
+      .button-primary { background: var(--accent); color: white; border: 1px solid transparent; box-shadow: 0 14px 38px rgba(15, 118, 110, 0.18); }
+      .button-secondary { background: white; color: var(--navy); border: 1px solid var(--border); }
+      .button-secondary:hover { background: #f8fafc; }
+      .panel {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 28px;
+        box-shadow: 0 18px 40px rgba(15, 23, 42, 0.06);
+        padding: 26px;
+      }
+      .hero-side {
+        display: grid;
+        gap: 18px;
+      }
+      .hero-photo {
+        width: 100%;
+        border-radius: 24px;
+        border: 1px solid var(--border);
+        box-shadow: 0 18px 40px rgba(15, 23, 42, 0.1);
+      }
+      .service-grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+      .service-card {
+        background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+        border: 1px solid var(--border);
+        border-radius: 28px;
+        padding: 30px;
+        box-shadow: 0 16px 36px rgba(15, 23, 42, 0.06);
+        min-height: 320px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .service-icon { font-size: 1.8rem; margin-bottom: 16px; }
+      .service-card h3 { margin: 0 0 16px; }
+      .service-card p { margin: 0 0 22px; color: var(--muted); flex-grow: 1; }
+      .service-card a { font-weight: 700; }
+      .section-heading { margin-bottom: 20px; }
+      .cred-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+      .stat-strip {
+        display: grid;
+        gap: 18px;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        margin: 0 auto 32px;
+      }
+      .stat-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        padding: 28px;
+        text-align: center;
+        box-shadow: 0 14px 36px rgba(15, 23, 42, 0.06);
+      }
+      .stat-number { font-size: 2.1rem; font-weight: 800; color: var(--accent); margin-bottom: 10px; }
+      .proof-grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); margin-top: 18px; }
+      .proof-pill {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 14px;
+        border-radius: 999px;
+        background: #f8fafc;
+        border: 1px solid var(--border);
+        color: var(--navy);
+        font-weight: 600;
+      }
+      .feature-article {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 20px;
+        background: linear-gradient(135deg, #ffffff 0%, #f0fdfa 100%);
+        border: 1px solid var(--border);
+        border-radius: 28px;
+        padding: 28px;
+        box-shadow: 0 16px 36px rgba(15, 23, 42, 0.06);
+      }
+      .article-media {
+        min-height: 220px;
+        border-radius: 20px;
+        background: linear-gradient(135deg, var(--accent), #115e59);
+        color: white;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        text-align: center;
+      }
+      .dark-section {
+        background: #0f172a;
+        color: #f8fafc;
+        border-radius: 32px;
+        padding: 48px 32px;
+        margin: 32px 0;
+      }
+      .dark-section h2, .dark-section p { color: #f8fafc; }
+      .dark-section .service-card {
+        background: rgba(255,255,255,0.06);
+        border-color: rgba(255,255,255,0.14);
+        color: #e2e8f0;
+        box-shadow: none;
+      }
+      .dark-section .service-card p { color: #cbd5e1; }
+      .dark-section .button-primary { background: #f8fafc; color: #0f172a; box-shadow: none; }
+      .dark-section .button-secondary { background: transparent; color: #f8fafc; border-color: rgba(255,255,255,0.24); }
+      .cta-section {
+        background: linear-gradient(135deg, #0f172a 0%, #0f766e 100%);
+        border-radius: 28px;
+        padding: 38px;
+        color: white;
+        margin-top: 32px;
+      }
+      .cta-section h2, .cta-section p { color: white; }
+      .cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
+      .cta-row .button-secondary { background: rgba(255,255,255,0.14); color: white; border: 1px solid rgba(255,255,255,0.2); }
+      .about-photo {
+        width: min(260px, 100%);
+        border-radius: 20px;
+        border: 1px solid var(--border);
+        box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
+        margin-bottom: 20px;
+      }
+      .section { padding: 24px 0 8px; }
+      .page { padding: 32px 24px 56px; }
+      .two-col { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 24px; }
+      .list { padding-left: 18px; }
+      .list li { margin-bottom: 8px; }
+      .pill { display: inline-block; padding: 4px 10px; border-radius: 999px; font-size: 0.9rem; background: #ecfeff; color: var(--teal); margin-right: 8px; margin-bottom: 8px; }
+      .event-list { display: grid; gap: 16px; }
+      .event { border: 1px solid var(--border); border-radius: 16px; background: var(--card); padding: 20px; }
+      .muted { color: var(--muted); }
+      .footer { background: var(--navy); color: #e2e8f0; padding: 32px 0; }
+      .footer-shell { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; }
+      form { display: grid; gap: 14px; }
+      label { font-weight: 700; color: var(--navy); }
+      input, textarea { width: 100%; padding: 12px 14px; border: 1px solid var(--border); border-radius: 10px; font: inherit; }
+      button { border: 0; cursor: pointer; }
+      .success { background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; padding: 12px 14px; border-radius: 12px; }
+      @media (max-width: 1000px) {
+        .hero-grid, .two-col, .feature-article { grid-template-columns: 1fr; }
+      }
+      @media (max-width: 800px) {
+        .nav-shell { flex-direction: column; align-items: flex-start; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="nav-shell">
+        <a class="brand" href="{{ url_for('home') }}">
+          <span class="brand-mark">VACS</span>
+          <span>Vanguard Agile &amp; Change Solutions</span>
+        </a>
+        <nav>
+          <a href="{{ url_for('home') }}">Home</a>
+          <a href="{{ url_for('about') }}">About</a>
+          <a href="{{ url_for('services_page') }}">Services</a>
+          <a href="{{ url_for('training') }}">Training</a>
+          <a href="{{ url_for('ocm_llm') }}">OCM LLM</a>
+          <a href="{{ url_for('contact') }}">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+      <div class="footer-shell">
+        <div>
+          <strong>Vanguard Agile &amp; Change Solutions</strong><br>
+          Organizational change, Agile enablement, and workforce performance.
+        </div>
+        <div>
+          <div><strong>Ryan Jacobson, PhD, PMP, CCMP, SCM</strong></div>
+          <div><strong>Phone:</strong> <a href="tel:+13148008373">314-800-8373</a></div>
+          <div><strong>Email:</strong> <a href="mailto:ryanjacobson2@gmail.com">ryanjacobson2@gmail.com</a></div>
+          <div><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/ryanjacobsonphd/" target="_blank" rel="noopener noreferrer">linkedin.com/in/ryanjacobsonphd</a></div>
+        </div>
+      </div>
+      <div class="footer-shell" style="padding-top: 8px; font-size: 0.8rem; color: #94a3b8;">
+        <span>Vanguard Change Solutions LLC IP statement</span>
+      </div>
+    </footer>
+  </body>
+</html>

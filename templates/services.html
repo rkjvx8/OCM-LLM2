@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}Vanguard Change Solutions | Services{% endblock %}
+{% block content %}
+<section class="page">
+  <div class="section">
+    <div class="eyebrow">Services</div>
+    <h1>Support for change, capability, and sustainable adoption.</h1>
+    <p class="lead">Services designed to help organizations move from intent to execution without losing sight of adoption, role performance, and business impact.</p>
+  </div>
+
+  <div class="section dark-section">
+    <div class="section-heading">
+      <h2>Consulting, facilitation, and training built for transformation</h2>
+      <p class="lead">Every service is designed to help leaders and teams make new ways of working stick, not just launch them.</p>
+    </div>
+    <div class="service-grid">
+      {% set icons = ['🧭', '⚡', '📈', '🌱'] %}
+      {% for service in services %}
+      <div class="service-card">
+        <div class="service-icon">{{ icons[loop.index0] }}</div>
+        <h3>{{ service.title }}</h3>
+        <p>{{ service.description }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="section two-col">
+    <div class="panel">
+      <h3>Common engagement patterns</h3>
+      <ul class="list">
+        <li>Change readiness reviews and adoption planning</li>
+        <li>Leadership coaching and decision support</li>
+        <li>Workshops for teams, leaders, and change agents</li>
+        <li>Training designs with reinforcement and follow-up</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3>What good looks like</h3>
+      <p>Clear roles, aligned leadership, and an adoption plan that helps people do their work differently and better.</p>
+    </div>
+  </div>
+</section>
+{% endblock %}

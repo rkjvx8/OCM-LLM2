@@ -1,5 +1,8 @@
 name: ocm-llm-app
 region: "nyc1"
+domains:
+  - domain: "vanguardchangesolutions.com"
+  - domain: "www.vanguardchangesolutions.com"
 services:
   - name: web
     github:

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}Vanguard Change Solutions | Training{% endblock %}
+{% block content %}
+<section class="page">
+  <div class="section">
+    <div class="eyebrow">Agile Community and Learning</div>
+    <h1>Independent workshops, community learning, and practical facilitation.</h1>
+    <p class="lead">A growing record of workshops and learning sessions that help teams and leaders adopt Agile practices with stronger change and people support.</p>
+  </div>
+
+  <div class="section two-col">
+    <div>
+      <div class="panel">
+        <h3>Upcoming sessions</h3>
+        <p>Designed for transformation leaders, Scrum practitioners, and change professionals who need practical guidance on adoption, training reinforcement, and leadership readiness.</p>
+      </div>
+    </div>
+    <div class="panel">
+      <h3>Why it matters</h3>
+      <p>Workshops are most effective when they connect learning to follow-through, role clarity, and the operating habits that sustain change.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Upcoming and recent sessions</h2>
+    <div class="event-list">
+      {% for event in events %}
+      <article class="event">
+        <div class="pill">{{ event.status }}</div>
+        <h3>{{ event.title }}</h3>
+        <p class="muted">{{ event.date }} • {{ event.format }} • {{ event.duration }}</p>
+        <p>{{ event.description }}</p>
+        <p><strong>Learning objectives:</strong></p>
+        <ul class="list">
+          {% for objective in event.objectives %}
+          <li>{{ objective }}</li>
+          {% endfor %}
+        </ul>
+        <p><strong>Audience:</strong> {{ event.audience | join(', ') }}</p>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}Vanguard Change Solutions | Contact{% endblock %}
+{% block content %}
+<section class="page">
+  <div class="section">
+    <div class="eyebrow">Contact</div>
+    <h1>Start a conversation about consulting, workshops, or transformation support.</h1>
+    <p class="lead">Share what you are working on and let’s explore how Vanguard can help you accelerate adoption, develop leaders, and sustain change.</p>
+  </div>
+
+  <div class="section two-col">
+    <div class="panel">
+      <h3>Reach out</h3>
+      <p><strong>Ryan Jacobson, PhD, PMP, CCMP, SCM</strong></p>
+      <p><strong>Phone:</strong> <a href="tel:+13148008373">314-800-8373</a></p>
+      <p><strong>Email:</strong> <a href="mailto:ryanjacobson2@gmail.com">ryanjacobson2@gmail.com</a></p>
+      <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/ryanjacobsonphd/" target="_blank" rel="noopener noreferrer">linkedin.com/in/ryanjacobsonphd</a></p>
+      <p>Ideal for engagements in Agile transformation, change enablement, leadership development, and learning strategy.</p>
+    </div>
+    <div class="panel">
+      {% if submitted %}
+      <div class="success" style="background: {% if success %}#ecfdf5{% else %}#fee2e2{% endif %}; color: {% if success %}#065f46{% else %}#991b1b{% endif %}; border: 1px solid {% if success %}#a7f3d0{% else %}#fecaca{% endif %}; padding: 12px 14px; border-radius: 12px; margin-bottom: 16px;">
+        {{ message }}
+      </div>
+      {% endif %}
+      <form method="post">
+        <label for="name">Name</label>
+        <input id="name" name="name" placeholder="Your name" required>
+
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" placeholder="you@example.com" required>
+
+        <label for="topic">Topic</label>
+        <input id="topic" name="topic" placeholder="Consulting, speaking, training, or other" required>
+
+        <label for="message">How can we help?</label>
+        <textarea id="message" name="message" rows="5" placeholder="Share a brief overview of your request."></textarea>
+
+        <button class="button button-primary" type="submit">Send inquiry</button>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}
