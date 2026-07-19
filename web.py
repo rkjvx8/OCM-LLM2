@@ -1,7 +1,7 @@
 import os
 import smtplib
 from email.message import EmailMessage
-from flask import Flask, render_template, request
+from flask import Flask, redirect, render_template, request
 
 from site_data import articles, services, training_events
 
@@ -15,6 +15,7 @@ SMTP_PASSWORD = os.getenv("SMTP_PASSWORD", "")
 SMTP_USE_TLS = os.getenv("SMTP_USE_TLS", "false").lower() in {"1", "true", "yes"}
 EMAIL_SENDER = os.getenv("EMAIL_SENDER", "no-reply@vanguardchangesolutions.com")
 EMAIL_RECIPIENT = os.getenv("EMAIL_RECIPIENT", "ryanjacobson2@gmail.com")
+OCM_LLM_PUBLIC_URL = "https://ocm-llm-app-tklky.ondigitalocean.app/"
 
 
 @app.route("/")
@@ -81,7 +82,7 @@ def contact():
 
 @app.route("/ocm-llm")
 def ocm_llm():
-    return render_template("ocm_llm.html")
+    return redirect(OCM_LLM_PUBLIC_URL, code=302)
 
 
 if __name__ == "__main__":
