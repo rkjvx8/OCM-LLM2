@@ -1,333 +1,157 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>OCM Chat</title>
-    <style>
-        body {
-            font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(180deg, #eff6ff 0%, #f8fafc 100%);
-            color: #0f172a;
-        }
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 28px 24px 48px;
-        }
-        h1 {
-            margin-bottom: 10px;
-            font-size: 2.6rem;
-            color: #1d4ed8;
-            line-height: 1.05;
-        }
-        .hero {
-            text-align: center;
-            padding: 24px 0 30px;
-        }
-        .hero p {
-            margin: 0 auto;
-            max-width: 760px;
-            color: #475569;
-            font-size: 1rem;
-            line-height: 1.8;
-        }
-        h1 {
-            margin-bottom: 16px;
-        }
-        .section {
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 24px;
-            box-shadow: 0 10px 30px rgba(15, 23, 42, .08);
-        }
-        h2 {
-            margin-top: 0;
-            font-size: 18px;
-        }
-        textarea {
-            width: 100%;
-            height: 140px;
-            padding: 12px;
-            font-size: 16px;
-            border: 1px solid #d1d5db;
-            border-radius: 8px;
-            resize: vertical;
-            box-sizing: border-box;
-        }
-        button {
-            margin-top: 12px;
-            padding: 12px 18px;
-            font-size: 16px;
-            border: none;
-            border-radius: 8px;
-            background: #2563eb;
-            color: white;
-            cursor: pointer;
-        }
-        button:hover {
-            background: #1d4ed8;
-        }
-        button.secondary {
-            background: #6b7280;
-        }
-        button.secondary:hover {
-            background: #4b5563;
-        }
-        button.danger {
-            background: #dc2626;
-        }
-        button.danger:hover {
-            background: #991b1b;
-        }
-        .answer {
-            margin-top: 24px;
-            background: #f9fafb;
-            padding: 20px;
-            border-radius: 12px;
-            border-left: 4px solid #2563eb;
-            white-space: pre-wrap;
-        }
-        .answer-heading {
-            font-weight: 700;
-            margin-bottom: 12px;
-            color: #111827;
-        }
-        .answer-text {
-            margin-top: 8px;
-            font-size: 1rem;
-            line-height: 1.8;
-            color: #334155;
-        }
-        .answer .emoji {
-            font-size: 1.15rem;
-            margin-right: 6px;
-        }
-        .image-card {
-            margin-top: 22px;
-            border: 1px solid #e2e8f0;
-            border-radius: 16px;
-            overflow: hidden;
-            background: white;
-        }
-        .image-card img {
-            width: 100%;
-            display: block;
-        }
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            padding: 8px 14px;
-            margin-top: 12px;
-            border-radius: 999px;
-            background: #e0f2fe;
-            color: #0369a1;
-            font-size: 0.95rem;
-        }
-        .status {
-            margin-top: 12px;
-            color: #6b7280;
-        }
-        .file-input-wrapper {
-            position: relative;
-            display: inline-block;
-        }
-        input[type="file"] {
-            display: none;
-        }
-        .file-label {
-            display: inline-block;
-            padding: 12px 18px;
-            font-size: 16px;
-            border: 1px solid #d1d5db;
-            border-radius: 8px;
-            background: #f3f4f6;
-            color: #1f2937;
-            cursor: pointer;
-        }
-        .file-label:hover {
-            background: #e5e7eb;
-        }
-        .file-list {
-            margin-top: 16px;
-            padding: 12px;
-            background: #f9fafb;
-            border-radius: 8px;
-        }
-        .file-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px;
-            margin-bottom: 8px;
-            background: white;
-            border-radius: 4px;
-            border-left: 3px solid #10b981;
-        }
-        .file-item:last-child {
-            margin-bottom: 0;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="hero">
-            <h1>OCM Chat + Organizational Context</h1>
-            <p>Upload your documents, ask a question, and get action-focused change management guidance with rich formatting and optional process visuals.</p>
-        </div>
-
-        <!-- File Upload Section -->
-        <div class="section">
-            <h2>Organizational Context</h2>
-            <p>Upload documents (TXT, MD, PDF, JSON, PPT, PPTX, XLS, XLSX) to provide organizational context. The AI will reference these files when answering questions.</p>
-            <div class="file-input-wrapper">
-                <input type="file" id="fileInput" accept=".txt,.md,.pdf,.json,.ppt,.pptx,.xls,.xlsx" />
-                <label for="fileInput" class="file-label">Choose File</label>
-            </div>
-            <button id="uploadButton" class="secondary" style="margin-left: 8px;">Upload</button>
-            <div class="status" id="uploadStatus"></div>
-            <div class="file-list" id="fileList" style="display: none;"></div>
-            <div class="badge">Supported formats: .txt .md .pdf .json .ppt .pptx .xls .xlsx</div>
-        </div>
-
-        <!-- Chat Section -->
-        <div class="section">
-            <h2>Ask a Question</h2>
-            <textarea id="prompt" placeholder="Type your change management question here..."></textarea>
-            <div style="margin-top: 12px; display: flex; align-items: center; gap: 12px;">
-                <input type="checkbox" id="createImage" />
-                <label for="createImage">Generate a process image with the response</label>
-            </div>
-            <button id="submit">Submit</button>
-            <div class="status" id="status"></div>
-            <div class="answer" id="answer" style="display:none;">
-                <div class="answer-heading">Recommended Actions and Expected Outcomes</div>
-                <div id="answerText" class="answer-text"></div>
-                <div id="imageContainer" class="image-card" style="display:none;">
-                    <img id="responseImage" src="" alt="Process diagram" />
-                </div>
-            </div>
-        </div>
+{% extends 'base.html' %}
+{% block title %}Vanguard Agile & Change Solutions | Home{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="hero-grid">
+    <div>
+      <div class="eyebrow">Agile Consulting & Change Leadership</div>
+      <h1>Empowering organizations to sustain transformation through stronger people, leadership, and adoption.</h1>
+      <p class="lead">Vanguard Agile &amp; Change Solutions blends organizational psychology, Agile delivery, and workforce performance to help leaders move from implementation to sustained business impact.</p>
+      <div class="button-row">
+        <a class="button button-primary" href="{{ url_for('contact') }}">Book a Consultation</a>
+        <a class="button button-secondary" href="{{ url_for('training') }}">View Workshops</a>
+      </div>
+      <div class="cred-list">
+        <span class="pill">Ph.D. Organizational Psychology</span>
+        <span class="pill">Transformation Consultant</span>
+        <span class="pill">SAFe, PMP, CCMP</span>
+        <span class="pill">Leadership & Change Enablement</span>
+      </div>
     </div>
+    <div class="hero-side">
+      <img class="hero-photo" src="https://media.licdn.com/dms/image/v2/D4E03AQHdc0G-_hizMQ/profile-displayphoto-scale_200_200/B4EZ19tfMxJEAY-/0/1775930571042?e=2147483647&v=beta&t=4BfJ74OBUHpHqtXHFcHzGzBRLLaDK-0TacrAgCGN8gc" alt="Ryan Jacobson" loading="lazy">
+      <div class="panel">
+        <h3>Organizations hire Vanguard to:</h3>
+        <ul class="list">
+          <li>Align leadership, teams, and change effort</li>
+          <li>Increase adoption and role clarity</li>
+          <li>Improve Agile performance across delivery and people</li>
+          <li>Connect training to measurable business outcomes</li>
+          <li>Build leadership systems that sustain change</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <script>
-        const fileInput = document.getElementById('fileInput');
-        const uploadButton = document.getElementById('uploadButton');
-        const uploadStatus = document.getElementById('uploadStatus');
-        const fileListEl = document.getElementById('fileList');
-        const promptEl = document.getElementById('prompt');
-        const submitButton = document.getElementById('submit');
-        const statusEl = document.getElementById('status');
-        const answerEl = document.getElementById('answer');
+<section class="page">
+  <div class="stat-strip">
+    <div class="hero-stat">
+      <strong>15+</strong>
+      <span>Years guiding transformation for enterprise clients</span>
+    </div>
+    <div class="hero-stat">
+      <strong>200+</strong>
+      <span>Professionals trained in Agile, change, and leadership</span>
+    </div>
+    <div class="hero-stat">
+      <strong>100%</strong>
+      <span>Focus on adoption, performance, and people-centered change</span>
+    </div>
+    <div class="hero-stat">
+      <strong>4</strong>
+      <span>Core consulting services for sustainable transformation</span>
+    </div>
+  </div>
 
-        async function loadFileList() {
-            try {
-                const response = await fetch('/api/files');
-                const data = await response.json();
-                if (data.files && data.files.length > 0) {
-                    fileListEl.innerHTML = '<strong>Uploaded Files:</strong>';
-                    data.files.forEach(file => {
-                        const fileItem = document.createElement('div');
-                        fileItem.className = 'file-item';
-                        fileItem.innerHTML = `
-                            <span>${file}</span>
-                            <button class="danger" onclick="deleteFile('${file}')">Delete</button>
-                        `;
-                        fileListEl.appendChild(fileItem);
-                    });
-                    fileListEl.style.display = 'block';
-                } else {
-                    fileListEl.style.display = 'none';
-                }
-            } catch (error) {
-                console.error('Error loading file list:', error);
-            }
-        }
+  <div class="dark-section">
+    <div class="section-heading">
+      <h2>Strategic services designed for real transformation</h2>
+      <p class="lead">A professional suite of consulting, facilitation, and training services that help leaders move from planning to workforce adoption, leadership alignment, and measurable business outcomes.</p>
+    </div>
+    <div class="service-grid">
+      {% set icons = ['🧭', '⚡', '📈'] %}
+      {% for service in services[:3] %}
+      <div class="service-card">
+        <div class="service-icon">{{ icons[loop.index0] }}</div>
+        <h3>{{ service.title }}</h3>
+        <p>{{ service.description }}</p>
+        <a href="{{ url_for('services_page') }}">Discover more</a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
 
-        async function deleteFile(filename) {
-            if (!confirm(`Delete '${filename}'?`)) return;
-            try {
-                const response = await fetch(`/api/files/${filename}`, { method: 'DELETE' });
-                const data = await response.json();
-                uploadStatus.textContent = data.message || data.error;
-                loadFileList();
-            } catch (error) {
-                uploadStatus.textContent = 'Error deleting file: ' + error.message;
-            }
-        }
+  <div class="section">
+    <div class="section-heading">
+      <h2>How Vanguard moves change programs forward</h2>
+      <p class="lead">We integrate organizational change, Agile enablement, leadership development, and performance measurement so your transformation delivers results that stick.</p>
+    </div>
+    <div class="service-grid">
+      <div class="service-card">
+        <h3>Adoption & Performance</h3>
+        <p>Measure readiness, role proficiency, and adoption across teams so transformation is sustained after launch.</p>
+      </div>
+      <div class="service-card">
+        <h3>Leadership Development</h3>
+        <p>Equip leaders with the behaviors, coaching, and decision-making systems needed to guide change and support teams.</p>
+      </div>
+      <div class="service-card">
+        <h3>Agile Transformation</h3>
+        <p>Combine Scrum, SAFe, and enterprise agility with practical people work that improves delivery and collaboration.</p>
+      </div>
+    </div>
+  </div>
 
-        uploadButton.addEventListener('click', async () => {
-            const file = fileInput.files[0];
-            if (!file) {
-                uploadStatus.textContent = 'Please select a file first.';
-                return;
-            }
+  <div class="section">
+    <div class="feature-article">
+      <div>
+        <div class="eyebrow">Featured Insight</div>
+        <h3>{{ articles[0].title }}</h3>
+        <p class="muted">Read time • 6 min</p>
+        <p>{{ articles[0].summary }}</p>
+        <a class="button button-primary" href="{{ articles[0].link }}">Read Article</a>
+      </div>
+      <div class="article-media">
+        <div>
+          <strong>Change is successful when people adopt it.</strong>
+          <p>Improving leadership, workforce readiness, and behavior change is the difference between a project and a lasting transformation.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
-            const formData = new FormData();
-            formData.append('file', file);
+  <div class="section">
+    <div class="section-heading">
+      <h2>Latest insights</h2>
+      <p class="lead">Timely guidance for leaders pushing through transformation, Agile adoption, and workforce performance challenges.</p>
+    </div>
+    <div class="service-grid">
+      {% for article in articles[1:] %}
+      <div class="service-card">
+        <h3>{{ article.title }}</h3>
+        <p>{{ article.summary }}</p>
+        <a href="{{ article.link }}">Read more</a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
 
-            uploadStatus.textContent = 'Uploading...';
-            try {
-                const response = await fetch('/api/upload', {
-                    method: 'POST',
-                    body: formData,
-                });
+  <div class="section">
+    <div class="section-heading">
+      <h2>Trusted by enterprise and public-sector teams</h2>
+      <p class="lead">Representative organizations that have engaged with Vanguard for change, Agile, and leadership work.</p>
+    </div>
+    <div class="proof-grid">
+      <span class="proof-pill">Lockheed Martin</span>
+      <span class="proof-pill">Disney</span>
+      <span class="proof-pill">Leidos</span>
+      <span class="proof-pill">LinkedIn</span>
+      <span class="proof-pill">Bayer</span>
+      <span class="proof-pill">TCS</span>
+      <span class="proof-pill">Univar</span>
+      <span class="proof-pill">Thermo Fisher</span>
+      <span class="proof-pill">Florida DOC</span>
+    </div>
+  </div>
 
-                const data = await response.json();
-                uploadStatus.textContent = data.message || data.error;
-                if (response.ok) {
-                    fileInput.value = '';
-                    loadFileList();
-                }
-            } catch (error) {
-                uploadStatus.textContent = 'Error: ' + error.message;
-            }
-        });
-
-        submitButton.addEventListener('click', async () => {
-            const prompt = promptEl.value.trim();
-            if (!prompt) {
-                statusEl.textContent = 'Please type a prompt first.';
-                return;
-            }
-
-            const createImage = document.getElementById('createImage').checked;
-
-            statusEl.textContent = 'Thinking...';
-            answerEl.style.display = 'none';
-            document.getElementById('imageContainer').style.display = 'none';
-
-            try {
-                const response = await fetch('/api/chat', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ prompt, create_image: createImage }),
-                });
-
-                const data = await response.json();
-                if (!response.ok) {
-                    statusEl.textContent = 'Error: ' + (data.error || 'Unknown error');
-                    return;
-                }
-
-                statusEl.textContent = 'Answer received.';
-                document.getElementById('answerText').textContent = data.answer;
-                answerEl.style.display = 'block';
-                if (data.image_url) {
-                    const imageEl = document.getElementById('responseImage');
-                    imageEl.src = data.image_url;
-                    document.getElementById('imageContainer').style.display = 'block';
-                }
-            } catch (error) {
-                statusEl.textContent = 'Error: ' + error.message;
-            }
-        });
-
-        // Load file list on page load
-        loadFileList();
-    </script>
-</body>
-</html>
+  <div class="cta-section">
+    <h2>Ready to accelerate adoption and make change measurable?</h2>
+    <p>Work with a consultant who blends deep Agile and change expertise with practical training, facilitation, and leadership support.</p>
+    <div class="cta-row">
+      <a class="button button-primary" href="{{ url_for('contact') }}">Book a Discovery Call</a>
+      <a class="button button-secondary" href="{{ url_for('training') }}">Explore upcoming sessions</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

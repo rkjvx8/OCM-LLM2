@@ -4,14 +4,12 @@ services:
   - name: web
     github:
       repo: "rkjvx8/OCM-LLM2"
-      branch: "main"
+      branch: "master"
       deploy_on_push: false
     dockerfile_path: "Dockerfile"
     run_command: "python web.py"
     http_port: 5000
     instance_size_slug: "basic-xxs"
-    instance_count: 1
-    instance_type: "web"
     envs:
       - key: "OPENAI_API_KEY"
         scope: "RUN_TIME"
