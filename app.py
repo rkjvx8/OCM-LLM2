@@ -1,4 +1,4 @@
-import oss
+import os
 import sys
 from dotenv import load_dotenv
 from openai import OpenAI
@@ -77,4 +77,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-http://127.0.0.1:5000

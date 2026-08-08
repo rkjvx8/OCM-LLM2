@@ -17,9 +17,9 @@
       {% set icons = ['🧭', '⚡', '📈', '🌱'] %}
       {% for service in services %}
       <div class="service-card">
-        <div class="service-icon">{{ icons[loop.index0] }}</div>
-        <h3>{{ service.title }}</h3>
-        <p>{{ service.description }}</p>
+        <div class="service-icon" style="color: #ffffff !important;">{{ icons[loop.index0] }}</div>
+        <h3 style="color: #ffffff !important;">{{ service.title }}</h3>
+        <p style="color: #ffffff !important;">{{ service.description }}</p>
       </div>
       {% endfor %}
     </div>

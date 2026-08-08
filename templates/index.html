@@ -63,10 +63,10 @@
       {% set icons = ['🧭', '⚡', '📈'] %}
       {% for service in services[:3] %}
       <div class="service-card">
-        <div class="service-icon">{{ icons[loop.index0] }}</div>
-        <h3>{{ service.title }}</h3>
-        <p>{{ service.description }}</p>
-        <a href="{{ url_for('services_page') }}">Discover more</a>
+        <div class="service-icon" style="color: #ffffff !important;">{{ icons[loop.index0] }}</div>
+        <h3 style="color: #ffffff !important;">{{ service.title }}</h3>
+        <p style="color: #ffffff !important;">{{ service.description }}</p>
+        <a href="{{ url_for('services_page') }}" style="color: #ffffff !important;">Discover more</a>
       </div>
       {% endfor %}
     </div>
@@ -132,16 +132,39 @@
       <h2>Trusted by enterprise and public-sector teams</h2>
       <p class="lead">Representative organizations that have engaged with Vanguard for change, Agile, and leadership work.</p>
     </div>
-    <div class="proof-grid">
-      <span class="proof-pill">Lockheed Martin</span>
-      <span class="proof-pill">Disney</span>
-      <span class="proof-pill">Leidos</span>
-      <span class="proof-pill">LinkedIn</span>
-      <span class="proof-pill">Bayer</span>
-      <span class="proof-pill">TCS</span>
-      <span class="proof-pill">Univar</span>
-      <span class="proof-pill">Thermo Fisher</span>
-      <span class="proof-pill">Florida DOC</span>
+    <div class="client-logo-grid">
+      <div class="client-logo-card">
+        <img class="client-logo-image" src="https://www.google.com/s2/favicons?domain=lockheedmartin.com&sz=64" alt="Lockheed Martin logo" loading="lazy" referrerpolicy="no-referrer">
+        <span class="client-logo-name">Lockheed Martin</span>
+      </div>
+      <div class="client-logo-card">
+        <img class="client-logo-image" src="https://www.google.com/s2/favicons?domain=disney.com&sz=64" alt="Disney logo" loading="lazy" referrerpolicy="no-referrer">
+        <span class="client-logo-name">Disney</span>
+      </div>
+      <div class="client-logo-card">
+        <img class="client-logo-image" src="https://www.google.com/s2/favicons?domain=linkedin.com&sz=64" alt="LinkedIn logo" loading="lazy" referrerpolicy="no-referrer">
+        <span class="client-logo-name">LinkedIn</span>
+      </div>
+      <div class="client-logo-card">
+        <img class="client-logo-image" src="https://www.google.com/s2/favicons?domain=bayer.com&sz=64" alt="Bayer logo" loading="lazy" referrerpolicy="no-referrer">
+        <span class="client-logo-name">Bayer</span>
+      </div>
+      <div class="client-logo-card">
+        <img class="client-logo-image" src="https://www.google.com/s2/favicons?domain=leidos.com&sz=64" alt="Leidos logo" loading="lazy" referrerpolicy="no-referrer">
+        <span class="client-logo-name">Leidos</span>
+      </div>
+      <div class="client-logo-card">
+        <img class="client-logo-image" src="https://www.google.com/s2/favicons?domain=thermofisher.com&sz=64" alt="Thermo Fisher logo" loading="lazy" referrerpolicy="no-referrer">
+        <span class="client-logo-name">Thermo Fisher</span>
+      </div>
+      <div class="client-logo-card">
+        <img class="client-logo-image" src="https://www.google.com/s2/favicons?domain=ford.com&sz=64" alt="Ford logo" loading="lazy" referrerpolicy="no-referrer">
+        <span class="client-logo-name">Ford</span>
+      </div>
+      <div class="client-logo-card">
+        <img class="client-logo-image" src="https://www.google.com/s2/favicons?domain=floridajobs.org&sz=64" alt="Florida DOC logo" loading="lazy" referrerpolicy="no-referrer">
+        <span class="client-logo-name">Florida DOC</span>
+      </div>
     </div>
   </div>
 

@@ -155,6 +155,47 @@
         color: var(--navy);
         font-weight: 600;
       }
+      .client-logo-grid {
+        display: grid;
+        gap: 14px;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        margin-top: 18px;
+      }
+      .client-logo-card {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 16px 18px;
+        border-radius: 18px;
+        border: 1px solid var(--border);
+        background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+        box-shadow: 0 10px 24px rgba(15, 23, 42, 0.05);
+      }
+      .client-logo-image {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        object-fit: contain;
+        background: #ffffff;
+        padding: 6px;
+        flex-shrink: 0;
+      }
+      .client-logo-mark {
+        display: inline-grid;
+        place-items: center;
+        width: 44px;
+        height: 44px;
+        border-radius: 14px;
+        color: white;
+        font-weight: 800;
+        background: linear-gradient(135deg, var(--blue), var(--teal));
+        flex-shrink: 0;
+      }
+      .client-logo-name {
+        font-weight: 700;
+        color: var(--navy);
+      }
       .feature-article {
         display: grid;
         grid-template-columns: 1.2fr 0.8fr;
@@ -182,14 +223,35 @@
         padding: 48px 32px;
         margin: 32px 0;
       }
-      .dark-section h2, .dark-section p { color: #f8fafc; }
+      .dark-section,
+      .dark-section h1,
+      .dark-section h2,
+      .dark-section h3,
+      .dark-section h4,
+      .dark-section h5,
+      .dark-section h6,
+      .dark-section p,
+      .dark-section li,
+      .dark-section span,
+      .dark-section a {
+        color: #f8fafc !important;
+      }
       .dark-section .service-card {
         background: rgba(255,255,255,0.06);
         border-color: rgba(255,255,255,0.14);
-        color: #e2e8f0;
+        color: #f8fafc;
         box-shadow: none;
       }
-      .dark-section .service-card p { color: #cbd5e1; }
+      .dark-section .service-card * {
+        color: #f8fafc !important;
+      }
+      .dark-section .service-card h3,
+      .dark-section .service-card p,
+      .dark-section .service-card a,
+      .dark-section .service-card .service-icon {
+        color: #f8fafc !important;
+      }
+      .dark-section .service-card p { color: #e2e8f0 !important; }
       .dark-section .button-primary { background: #f8fafc; color: #0f172a; box-shadow: none; }
       .dark-section .button-secondary { background: transparent; color: #f8fafc; border-color: rgba(255,255,255,0.24); }
       .cta-section {
